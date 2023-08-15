@@ -111,3 +111,25 @@ func FileHas(path, what string) bool {
 	}
 	return bytes.Contains(data, []byte(what))
 }
+
+// ReadString returns the contents of the given filename as a string.
+// Does not use the cache.  Returns an empty string if there were errors.
+func ReadString(filename string) string {
+	if data, err := os.ReadFile(filename); err == nil { // success
+		return string(data)
+	}
+	return ""
+}
+
+// CanRead checks if 1 byte can actually be read from the given filename
+func CanRead(filename string) bool {
+	f, err := os.Open(filename)
+	if err != nil {
+		return false
+	}
+	defer f.Close()
+	var onebyte [1]byte
+	n, err := io.ReadFull(f, onebyte[:])
+	// could exactly 1 byte be read?
+	return err == nil && n == 1
+}
