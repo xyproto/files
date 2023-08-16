@@ -26,10 +26,10 @@ func IsFile(path string) bool {
 	return err == nil && fi.Mode().IsRegular()
 }
 
-// IsDir checks if the given path exists and is a directory
-func IsDir(path string) bool {
-	fi, err := os.Stat(path)
-	return err == nil && fi.Mode().IsDir()
+// IsSymlink checks if the given path exists and is a symbolic link
+func IsSymlink(path string) bool {
+	fi, err := os.Lstat(path)
+	return err == nil && fi.Mode()&os.ModeSymlink != 0
 }
 
 // IsFileOrSymlink checks if the given path exists and is a regular file or a symbolic link
@@ -37,6 +37,12 @@ func IsFileOrSymlink(path string) bool {
 	// use Lstat instead of Stat to avoid following the symlink
 	fi, err := os.Lstat(path)
 	return err == nil && (fi.Mode().IsRegular() || (fi.Mode()&os.ModeSymlink != 0))
+}
+
+// IsDir checks if the given path exists and is a directory
+func IsDir(path string) bool {
+	fi, err := os.Stat(path)
+	return err == nil && fi.Mode().IsDir()
 }
 
 // Which tries to find the given executable name in the $PATH
