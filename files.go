@@ -101,7 +101,9 @@ func TimestampedFilename(filename string) string {
 	return fmt.Sprintf("%04d-%02d-%02dT%02d-%02d-%02d-%s", year, int(month), day, hour, minute, second, filename)
 }
 
-// ShortPath replaces the home directory with ~ in a given path
+// ShortPath replaces the home directory with ~ in a given path.
+// The given path is expected to contain the home directory path either 0 or 1 times,
+// and if it contains the path to the home directory, it is expected to be at the start of the given string.
 func ShortPath(path string) string {
 	homeDir := env.HomeDir()
 	if strings.HasPrefix(path, homeDir) {
@@ -120,7 +122,7 @@ func FileHas(path, what string) bool {
 }
 
 // ReadString returns the contents of the given filename as a string.
-// Does not use the cache.  Returns an empty string if there were errors.
+// Returns an empty string if there were errors.
 func ReadString(filename string) string {
 	if data, err := os.ReadFile(filename); err == nil { // success
 		return string(data)
