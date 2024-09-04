@@ -19,6 +19,7 @@ import (
 var (
 	cacheMutex  sync.RWMutex
 	existsCache = make(map[string]bool)
+	whichCache  = make(map[string]string)
 )
 
 // Exists checks if the given path exists
@@ -59,6 +60,24 @@ func Which(executable string) string {
 		return p
 	}
 	return ""
+}
+
+// WhichCached tries to find the given executable name in the $PATH, using a cache for faster access.
+// Assumes that the $PATH environment variable has not changed since the last check.
+func WhichCached(executable string) string {
+	cacheMutex.RLock()
+	cachedResult, cached := whichCache[executable]
+	cacheMutex.RUnlock()
+	if cached {
+		return cachedResult
+	}
+	// If not cached, perform the lookup
+	path := Which(executable)
+	// Cache the result
+	cacheMutex.Lock()
+	whichCache[executable] = path
+	cacheMutex.Unlock()
+	return path
 }
 
 // BinDirectory will check if the given filename is in one of these directories:
