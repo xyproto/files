@@ -233,11 +233,13 @@ func ExistsCached(path string) bool {
 	return exists
 }
 
-// ClearCache clears the cache used by ExistsCached.
+// ClearCache clears all cache
 func ClearCache() {
 	cacheMutex.Lock()
 	defer cacheMutex.Unlock()
 	existsCache = make(map[string]bool)
+	executableCache = make(map[string]bool)
+	whichCache = make(map[string]string)
 }
 
 // RemoveFile deletes a file, but it only returns an error if the file both exists and also could not be removed
