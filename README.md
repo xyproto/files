@@ -37,4 +37,4 @@ func IsExecutableCached(path string) bool
 
 * Version: 1.9.0
 * License: BSD-3
-* Author: Alexander F. Rødseth &gt;xyproto@archlinux.org&lt;
+* Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;
