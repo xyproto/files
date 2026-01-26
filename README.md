@@ -32,6 +32,7 @@ func DirectoryWithFiles(path string) (bool, error)
 func Executable(path string) bool
 func ExecutableCached(path string) bool
 func Empty(path string) bool
+func RealPath(path string) bool
 ```
 
 ## Running commands
