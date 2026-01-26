@@ -50,6 +50,6 @@ func Fish(command string) (string, error)
 
 ## General info
 
-* Version: 1.10.1
+* Version: 1.10.2
 * License: BSD-3
 * Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;
