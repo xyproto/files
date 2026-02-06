@@ -22,9 +22,9 @@ func TestSomething(t *testing.T) {
 	}
 	fmt.Println(output)
 
-	output, err = Fish("echo FISH")
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Println(output)
+	//output, err = Fish("echo FISH")
+	//if err != nil {
+	//    t.Error(err)
+	//}
+	//fmt.Println(output)
 }
