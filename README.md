@@ -1,6 +1,6 @@
 # files
 
-Functions for querying files and paths.
+Functions for dealing with files, paths and processes.
 
 ## Function signatures
 
@@ -48,7 +48,7 @@ func Bash(command string) (string, error)
 func Fish(command string) (string, error)
 ```
 
-## Examining processes
+## Examining and stopping processes
 
 ```
 // Try to find the PID given a process name (similar to pgrep)
